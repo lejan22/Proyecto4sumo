@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody enemyRigidbody;
     private GameObject player;
     [SerializeField] private float speed = 10f;
+    private float minHeight = -5f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,9 @@ public class Enemy : MonoBehaviour
     {
         Vector3 direction = (player.transform.position - transform.position).normalized;
         enemyRigidbody.AddForce(direction * speed);
+        if (transform.position.y < minHeight)
+        {
+            Destroy(gameObject);
+        }
     }
 }
